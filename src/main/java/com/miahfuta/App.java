@@ -49,14 +49,11 @@ public class App {
 		roleCompare = new RoleCompare();
 		roleWatcher = new RoleWatcher();
 
-		String MiFuInfo = prop.getProperty("main_bot_token");
-		String MiFuTest = prop.getProperty("test_bot_token");
-
 		if (args.length != 0)
 			if (args[0].equalsIgnoreCase("debug=true"))
 				testing = true;
 
-		String botToken = testing ? MiFuTest : MiFuInfo;
+		String botToken = testing ? prop.getProperty("test_bot_token") : prop.getProperty("main_bot_token");
 
 		client = DiscordClient.create(botToken).gateway().setAwaitConnections(false).setEnabledIntents(IntentSet.all())
 				.login().block();
