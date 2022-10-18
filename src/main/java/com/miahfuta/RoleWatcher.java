@@ -28,8 +28,8 @@ public class RoleWatcher {
         client = gdc;
         prop = p;
 
-        String announcements = prop.getProperty("announcements_channel_id");
-        String spamTesting = prop.getProperty("testing_channel_id");
+        String announcements = prop.getProperty("bot_announcements_channel_id");
+        String spamTesting = prop.getProperty("test_channel_id");
 
         msgChannel = testing ? spamTesting : announcements;
 
@@ -41,7 +41,7 @@ public class RoleWatcher {
 
         for (String roleID : roles) {
 
-            boolean isPlus = roleID.equals(prop.getProperty("patron_tier2_role_id"));
+            boolean isPlus = roleID.equals(prop.getProperty("discord_patron_tier2_role_id"));
 
             String tier = "Tier " + (isPlus ? "2" : "1");
 

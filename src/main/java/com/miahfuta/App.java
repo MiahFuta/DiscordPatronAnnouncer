@@ -53,22 +53,22 @@ public class App {
 			if (args[0].equalsIgnoreCase("debug=true"))
 				testing = true;
 
-		String botToken = testing ? prop.getProperty("test_bot_token") : prop.getProperty("main_bot_token");
+		String botToken = testing ? prop.getProperty("test_token") : prop.getProperty("bot_token");
 
-		client = DiscordClient.create(botToken).gateway().setAwaitConnections(false).setEnabledIntents(IntentSet.all())
-				.login().block();
+		client = DiscordClient.create(botToken).gateway().setAwaitConnections(false)
+				.setEnabledIntents(IntentSet.all()).login().block();
 
 		client.getEventDispatcher().on(ReadyEvent.class).subscribe(event -> {
 
-			roleCompare.init(client, prop.getProperty("server_id"));
+			roleCompare.init(client, prop.getProperty("discord_server_id"));
 			roleWatcher.init(roleCompare, client, testing, prop);
 
 			User self = event.getSelf();
 
 			System.out.println(String.format("Logged in as %s#%s", self.getUsername(), self.getDiscriminator()));
 
-			ClientActivity activity = testing ? ClientActivity.playing(prop.getProperty("test_playing_activity"))
-					: ClientActivity.watching(prop.getProperty("main_watching_activity"));
+			ClientActivity activity = testing ? ClientActivity.playing(prop.getProperty("test_activity"))
+					: ClientActivity.watching(prop.getProperty("bot_watching_activity"));
 
 			client.updatePresence(ClientPresence.online(activity)).block();
 
@@ -81,8 +81,8 @@ public class App {
 
 			ArrayList<String> patreonRoles = new ArrayList<String>();
 
-			patreonRoles.add(prop.getProperty("patron_tier1_role_id"));
-			patreonRoles.add(prop.getProperty("patron_tier2_role_id"));
+			patreonRoles.add(prop.getProperty("discord_patron_tier1_role_id"));
+			patreonRoles.add(prop.getProperty("discord_patron_tier2_role_id"));
 
 			roleWatcher.patreon(event, patreonRoles);
 
