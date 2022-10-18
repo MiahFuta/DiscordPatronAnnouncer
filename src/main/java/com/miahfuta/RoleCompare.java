@@ -12,7 +12,7 @@ import discord4j.core.object.entity.Role;
 public class RoleCompare {
 
     private static GatewayDiscordClient client;
-    
+
     private static String serverID;
 
     private static List<Member> serverMembers;
@@ -26,7 +26,7 @@ public class RoleCompare {
         serverID = id;
 
         updateServerMembers();
-        
+
     }
 
     public void updateServerMembers() {
@@ -78,7 +78,7 @@ public class RoleCompare {
 
         Collection<String> oldCollection = oldRoles;
         Collection<String> newCollection = newRoles;
-        
+
         oldCollection.removeAll(newCollection);
 
         List<String> removedRoles = new ArrayList<String>();
@@ -89,10 +89,10 @@ public class RoleCompare {
     }
 
     private void cleanNewRoles() {
-        
+
         Collection<String> oldCollection = oldRoles;
         Collection<String> newCollection = newRoles;
-        
+
         newCollection.removeAll(oldCollection);
 
         List<String> addedRoles = new ArrayList<String>();
@@ -101,5 +101,5 @@ public class RoleCompare {
         newRoles = addedRoles;
 
     }
-    
+
 }

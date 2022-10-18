@@ -31,7 +31,7 @@ public class RoleWatcher {
         String announcements = prop.getProperty("announcements_channel_id");
         String spamTesting = prop.getProperty("testing_channel_id");
 
-        msgChannel = testing ? spamTesting : announcements; 
+        msgChannel = testing ? spamTesting : announcements;
 
     }
 
@@ -52,18 +52,17 @@ public class RoleWatcher {
                 sendMsg(message, true);
 
                 break;
-    
+
             }
-            
+
         }
 
     }
 
     private String randomEmote() {
 
-        ArrayList<String> emotes = new ArrayList<String>( Arrays.asList(
-            ":heart:",  ":blush:", ":smiling_face_with_3_hearts:"
-        ));
+        ArrayList<String> emotes = new ArrayList<String>(Arrays.asList(
+                ":heart:", ":blush:", ":smiling_face_with_3_hearts:"));
 
         Random random = new Random();
         int rand = random.nextInt(emotes.size());
@@ -74,11 +73,11 @@ public class RoleWatcher {
 
     public static void sendMsg(String message, boolean reaction) {
 
-		TextChannel channel = (TextChannel) client.getChannelById(Snowflake.of(msgChannel)).block();
+        TextChannel channel = (TextChannel) client.getChannelById(Snowflake.of(msgChannel)).block();
 
-		Message msg = channel.createMessage(message).block();
+        Message msg = channel.createMessage(message).block();
 
-        if (reaction){ 
+        if (reaction) {
             msg.addReaction(ReactionEmoji.codepoints("U+1f44b")).block(); // Wave
             msg.addReaction(ReactionEmoji.codepoints("U+1f60a")).block(); // Blush
             msg.addReaction(ReactionEmoji.codepoints("U+1f970")).block(); // Face Hearts
@@ -87,6 +86,6 @@ public class RoleWatcher {
 
         System.out.println(message);
 
-	}
+    }
 
 }
