@@ -48,7 +48,8 @@ public class RoleCompare {
             if (id.equals(memberID)) {
 
                 List<Role> roles = member.getRoles().collectList().block();
-                for (Role role : roles) oldRoles.add(role.getId().asString());
+                for (Role role : roles)
+                    oldRoles.add(role.getId().asString());
 
                 break;
 
@@ -62,7 +63,8 @@ public class RoleCompare {
 
         newRoles = new ArrayList<String>();
 
-        for (Role role : roles) newRoles.add(role.getId().asString());
+        for (Role role : roles)
+            newRoles.add(role.getId().asString());
 
         cleanNewRoles();
 
@@ -82,7 +84,8 @@ public class RoleCompare {
         oldCollection.removeAll(newCollection);
 
         List<String> removedRoles = new ArrayList<String>();
-        for (String role : oldCollection) removedRoles.add(role);
+        for (String role : oldCollection)
+            removedRoles.add(role);
 
         return removedRoles.contains(roleID);
 
@@ -96,7 +99,8 @@ public class RoleCompare {
         newCollection.removeAll(oldCollection);
 
         List<String> addedRoles = new ArrayList<String>();
-        for (String role : newCollection) addedRoles.add(role);
+        for (String role : newCollection)
+            addedRoles.add(role);
 
         newRoles = addedRoles;
 

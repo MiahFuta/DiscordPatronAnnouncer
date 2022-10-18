@@ -52,15 +52,9 @@ public class App {
 		String MiFuInfo = prop.getProperty("main_bot_token");
 		String MiFuTest = prop.getProperty("test_bot_token");
 
-		if (args.length != 0) {
-
-			if (args[0].equalsIgnoreCase("debug=true")) {
-
+		if (args.length != 0)
+			if (args[0].equalsIgnoreCase("debug=true"))
 				testing = true;
-
-			}
-
-		}
 
 		String botToken = testing ? MiFuTest : MiFuInfo;
 
@@ -105,17 +99,9 @@ public class App {
 
 			String channelID = message.getChannelId().asString();
 
-			if (!event.getMember().get().isBot()) {
-
-				String msg = message.getContent();
-
-				if (msg.equalsIgnoreCase("!ping")) {
-
+			if (!event.getMember().get().isBot())
+				if (message.getContent().equalsIgnoreCase("!ping"))
 					sendMsg(channelID, "pong!");
-
-				}
-
-			}
 
 		});
 
