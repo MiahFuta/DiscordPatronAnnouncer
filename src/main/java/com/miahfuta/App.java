@@ -35,7 +35,7 @@ public class App {
 		prop = new Properties();
 
 		String fileName = "app.config";
-		
+
 		try (FileInputStream fis = new FileInputStream(fileName)) {
 			prop.load(fis);
 		} catch (FileNotFoundException ex) {
@@ -64,7 +64,8 @@ public class App {
 
 		String botToken = testing ? MiFuTest : MiFuInfo;
 
-		client = DiscordClient.create(botToken).gateway().setAwaitConnections(false).setEnabledIntents(IntentSet.all()).login().block();
+		client = DiscordClient.create(botToken).gateway().setAwaitConnections(false).setEnabledIntents(IntentSet.all())
+				.login().block();
 
 		client.getEventDispatcher().on(ReadyEvent.class).subscribe(event -> {
 
@@ -75,7 +76,8 @@ public class App {
 
 			System.out.println(String.format("Logged in as %s#%s", self.getUsername(), self.getDiscriminator()));
 
-			ClientActivity activity = testing ? ClientActivity.playing(prop.getProperty("test_playing_activity")) : ClientActivity.watching(prop.getProperty("main_watching_activity"));
+			ClientActivity activity = testing ? ClientActivity.playing(prop.getProperty("test_playing_activity"))
+					: ClientActivity.watching(prop.getProperty("main_watching_activity"));
 
 			client.updatePresence(ClientPresence.online(activity)).block();
 
@@ -112,7 +114,7 @@ public class App {
 					sendMsg(channelID, "pong!");
 
 				}
-				
+
 			}
 
 		});
@@ -127,7 +129,7 @@ public class App {
 
 		channel.createMessage(message).block();
 
-        System.out.println(message);
+		System.out.println(message);
 
 	}
 
