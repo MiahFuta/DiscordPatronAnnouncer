@@ -1,6 +1,8 @@
 # DiscordPatronAnnouncer 
 A Simple Discord Bot to Announce Members when given a Patron Role  
 
+- Do you like my work? [Support Me on Patreon](https://www.patreon.com/miahfuta)
+
 <br/>
 
 ## Requirements  
