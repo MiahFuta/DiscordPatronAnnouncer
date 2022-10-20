@@ -1,6 +1,6 @@
 @echo off
 
-cd %homedrive%%homepath%\Documents\GitHub\DiscordBot
+cd C:\Users\SoWho\Documents\GitHub\DiscordBot
 
 java -jar DiscordBot.jar
 
