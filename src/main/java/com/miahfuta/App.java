@@ -94,17 +94,22 @@ public class App {
 
 		});
 
-		client.getEventDispatcher().on(MessageCreateEvent.class).subscribe(event -> {
+		// client.getEventDispatcher().on(MessageCreateEvent.class).subscribe(event -> {
+		// 	Message message = event.getMessage();
+		// 	String channelID = message.getChannelId().asString();
+		// 	if (!event.getMember().get().isBot())
+		// 		if (message.getContent().equalsIgnoreCase("!ping"))
+		// 			sendMsg(channelID, "pong!");
+		// });
 
-			Message message = event.getMessage();
-
-			String channelID = message.getChannelId().asString();
-
-			if (!event.getMember().get().isBot())
-				if (message.getContent().equalsIgnoreCase("!ping"))
-					sendMsg(channelID, "pong!");
-
-		});
+		// Temp Fix for the broken shit above, maybe I should do everything like this, idk.
+		client.getEventDispatcher().on(MessageCreateEvent.class)
+			.map(MessageCreateEvent::getMessage)
+			.filter(message -> message.getContent().equalsIgnoreCase("!ping"))
+			.flatMap(Message::getChannel)
+			.flatMap(channel -> channel.createMessage("pong!"))
+			.doOnError(error -> {})
+			.subscribe(null, error -> {});
 
 		client.onDisconnect().block();
 
