@@ -94,6 +94,7 @@ public class App {
 
 		});
 
+		// Connection gets inturuped! Needs to be fixed, but I'm too lazy for that nonsense.
 		// client.getEventDispatcher().on(MessageCreateEvent.class).subscribe(event -> {
 		// 	Message message = event.getMessage();
 		// 	String channelID = message.getChannelId().asString();
@@ -101,15 +102,6 @@ public class App {
 		// 		if (message.getContent().equalsIgnoreCase("!ping"))
 		// 			sendMsg(channelID, "pong!");
 		// });
-
-		// Temp Fix for the broken shit above, maybe I should do everything like this, idk.
-		client.getEventDispatcher().on(MessageCreateEvent.class)
-			.map(MessageCreateEvent::getMessage)
-			.filter(message -> message.getContent().equalsIgnoreCase("!ping"))
-			.flatMap(Message::getChannel)
-			.flatMap(channel -> channel.createMessage("pong!"))
-			.doOnError(error -> {})
-			.subscribe(null, error -> {});
 
 		client.onDisconnect().block();
 
