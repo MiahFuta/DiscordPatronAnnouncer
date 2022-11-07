@@ -10,7 +10,6 @@ import discord4j.common.util.Snowflake;
 import discord4j.core.DiscordClient;
 import discord4j.core.event.domain.guild.MemberUpdateEvent;
 import discord4j.core.event.domain.lifecycle.ReadyEvent;
-import discord4j.core.event.domain.lifecycle.ReconnectEvent;
 import discord4j.core.event.domain.message.MessageCreateEvent;
 import discord4j.core.GatewayDiscordClient;
 import discord4j.core.object.entity.channel.TextChannel;
@@ -56,8 +55,12 @@ public class App {
 
 		String botToken = testing ? prop.getProperty("test_token") : prop.getProperty("bot_token");
 
-		client = DiscordClient.create(botToken).gateway().setAwaitConnections(false)
-				.setEnabledIntents(IntentSet.all()).login().block();
+		client = DiscordClient.create(botToken)
+			.gateway()
+			.setAwaitConnections(false)
+			.setEnabledIntents(IntentSet.all())
+			.login()
+			.block();
 
 		client.getEventDispatcher().on(ReadyEvent.class).subscribe(event -> {
 
@@ -100,16 +103,6 @@ public class App {
 			if (!event.getMember().get().isBot())
 				if (message.getContent().equalsIgnoreCase("!ping"))
 					sendMsg(channelID, "pong!");
-
-		});
-
-		// Attempted Fix for Unknown Connection Reset Bug
-		client.getEventDispatcher().on(ReconnectEvent.class).subscribe(event -> {
-
-			System.out.println("Reconnecting...");
-
-			client = DiscordClient.create(botToken).gateway().setAwaitConnections(false)
-				.setEnabledIntents(IntentSet.all()).login().block();
 
 		});
 
